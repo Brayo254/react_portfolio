@@ -11,40 +11,44 @@ const Header = () => {
   }
 
   return (
-    <>
-      <Container>
-        <NavMenu click={click} onClick={handleClick}>
-          <MobileIcons>{click ? <FaTimes /> : <FaBars />}</MobileIcons>
-          <StyledNavLink to="/">Home</StyledNavLink>
-          <StyledNavLink to="/about">About</StyledNavLink>
-          <StyledNavLink to="/services">Services</StyledNavLink>
-          <StyledNavLink to="/contact">Contact</StyledNavLink>
-        </NavMenu>
-      </Container>
-    </>
+    <Container>
+      <NavMenu click={click}>
+        <MobileIcons onClick={handleClick}>
+          {click ? <FaTimes /> : <FaBars />}
+        </MobileIcons>
+        <StyledNavLink to="/">Home</StyledNavLink>
+        <StyledNavLink to="/about">About</StyledNavLink>
+        <StyledNavLink to="/services">Services</StyledNavLink>
+        <StyledNavLink to="/contact">Contact</StyledNavLink>
+      </NavMenu>
+    </Container>
   );
 };
 
 const NavMenu = styled.nav`
   background-color: ${({ theme }) => theme.colors.textColor};
-  height: 100px;
+  height: 100%;
   display: flex;
   justify-content: flex-end;
+  overflow: hidden;
   align-items: center;
   padding-right: 1.9rem;
 
   @media screen and (max-width: ${({ theme }) => theme.mobile}) {
     display: flex;
+    justify-content: flex-start;
     flex-direction: column;
     position: absolute;
-    top: 80px;
-    left: ${({ click }) => (click ? 0 : "-100%")};
     transition: all 0.5s ease;
 
     background-color: red;
     width: 100%;
-    height: 90vh;
+    height: ${({ click }) => (click ? "90vh" : "100%")};
     opacity: 1;
+
+    a:first-of-type {
+      margin-top: 100px;
+    }
   }
 `;
 
@@ -64,11 +68,8 @@ const StyledNavLink = styled(NavLink)`
     color: ${({ theme }) => theme.colors.primaryColor2};
     transition: all 0.5s ease-in;
   }
-
-  @media screen and (max-width: ${({ theme }) => theme.mobile}) {
-    display: none;
-  }
 `;
+
 const MobileIcons = styled.div`
   display: none;
   @media screen and (max-width: ${({ theme }) => theme.mobile}) {
@@ -85,6 +86,7 @@ const MobileIcons = styled.div`
 
 const Container = styled.div`
   position: relative;
+  height: 100px;
 `;
 
 export default Header;
