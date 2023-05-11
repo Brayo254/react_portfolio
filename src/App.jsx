@@ -1,5 +1,5 @@
 import GlobalFonts from "./fonts/fonts";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -20,7 +20,7 @@ function App() {
     mobile: "768px",
   };
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ThemeProvider theme={theme}>
         <>
           <Routes>
@@ -35,7 +35,7 @@ function App() {
           <GlobalFonts />
         </>
       </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 export default App;
